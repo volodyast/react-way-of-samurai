@@ -1,0 +1,15 @@
+.message {
+    padding: 0px;
+    color: cyan;
+}
+
+.me {
+    color: crimson;
+    background-color: darkred;
+}
+
+.notMe {
+    color: darkorange;
+    text-align: right;
+    background-color: darkslategray;
+}
