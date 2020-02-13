@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
+import store from "../../redax/state";
 
 const Profile = (props) => {
     return (
@@ -9,8 +10,7 @@ const Profile = (props) => {
             <ProfileInfo/>
             <MyPosts
                 profilePage={props.profilePage}
-                addPost={props.addPost}
-                updatePostText={props.updatePostText}/>
+                dispatch={props.dispatch}/>
         </div>
     )
 }

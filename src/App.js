@@ -8,11 +8,10 @@ import {Route} from 'react-router-dom';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Music from './components/Music/Music';
-import {addMessage} from "./redax/state";
-
+import store from "./redax/state";
 
 const App = (props) => {
-
+    console.log(props)
     return (
         <div className='app-wrapper'>
             <Header/>
@@ -21,13 +20,11 @@ const App = (props) => {
                 <Route path="/profile" render={() =>
                     <Profile
                         profilePage={props.state.profilePage}
-                        addPost={props.addPost}
-                        updatePostText={props.updatePostText}/>}/>
+                        dispatch={props.dispatch}/>}/>
                 <Route path="/dialogs" render={() =>
                     <Dialogs
                         state={props.state.dialogsPage}
-                        addMessage={props.addMessage}
-                        updateMessageText={props.updateMessageText}/>}/>
+                        dispatch={props.dispatch}/>}/>
                 <Route path="/news" render={() => <News/>}/>
                 <Route path="/music" render={() => <Music/>}/>
                 <Route path="/settings" render={() => <Settings/>}/>
