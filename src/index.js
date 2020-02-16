@@ -1,4 +1,4 @@
-import store from './redax/store'
+import store from './redax/redax-store'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -15,8 +15,10 @@ export const rerenderEntireTree = () => {
     </BrowserRouter>, document.getElementById('root'));
 }
 rerenderEntireTree();
-store.getState();
-store.subscribe(rerenderEntireTree);
+store.subscribe(()=>{
+    let state = store.getState();
+    rerenderEntireTree(state);
+});
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
