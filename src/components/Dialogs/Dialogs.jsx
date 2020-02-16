@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import MessageOfDialog from './MessageOfDialog/MessageOfDialog';
+import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redax/dialogsPageReducer";
 
 const Dialogs = (props) => {
 
@@ -10,14 +11,13 @@ const Dialogs = (props) => {
     let newMessageItem = React.createRef();
 
     let addMessage = () => {
-        let action = {type: 'ADD-MESSAGE'};
+        let action = addMessageActionCreator();
         props.dispatch(action);
     }
     let onMessageChange = () => {
         let text = newMessageItem.current.value;
-        let action = {type: 'UPDATE-MESSAGE-TEXT', newText: text};
+        let action = updateNewMessageTextActionCreator(text);
         props.dispatch(action);
-
     }
 
     return (
@@ -31,7 +31,8 @@ const Dialogs = (props) => {
                 </div>
                 <div>
                     <div>
-                        <textarea onChange={onMessageChange} ref={newMessageItem} value={props.state.newMessageText}/>
+                        <textarea onChange={onMessageChange} placeholder='Enter some message' ref={newMessageItem}
+                                  value={props.state.newMessageText}/>
                     </div>
                     <div>
                         <button onClick={addMessage}>Send message</button>

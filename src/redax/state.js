@@ -1,7 +1,7 @@
-const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT';
-const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const ADD_POST = 'ADD-POST';
+import profilePageReducer from "./profilePageReducer";
+import dialogsPageReducer from "./dialogsPageReducer";
+import sitebarReducer from "./sitebarReducer";
+
 
 let store = {
     _state: {
@@ -30,7 +30,7 @@ let store = {
                 {id: 5, message: 'Are you sleep?', type: false},
                 {id: 6, message: 'What up', type: true}
             ],
-            newMessageText: 'it=kamasutra.com'
+            newMessageText: ''
         },
         sitebar: [
             {id: 1, name: 'Толік'},
@@ -41,66 +41,24 @@ let store = {
             {id: 6, name: 'Міша'}]
     },
 
-    _subscribe(observer) {
+    _subscribe() {
         console.log("нічого");
     },
-    addPost() {
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        };
-        this._state.profilePage.postData.push(newPost);
-        this._state.profilePage.newPostText = '';
-        this._subscribe();
-    },
-    addMessage() {
-        let newMessageElement = {
-            id: 8,
-            message: this._state.dialogsPage.newMessageText,
-            type: true
-        };
-        this._state.dialogsPage.messages.push(newMessageElement);
-        this._state.dialogsPage.newMessageText = '';
-        this._subscribe();
-    },
-    updatePostText(newText) {
-        this._state.profilePage.newPostText = newText;
-        this._subscribe();
-    },
-    updateMessageText(newText) {
-        console.log(this._state)
-        this._state.dialogsPage.newMessageText = newText;
-        this._subscribe();
-    },
-
     subscribe(observer) {
         this._subscribe = observer;
     },
+
     getState() {
         return this._state;
     },
 
     dispatch(action) {
-        switch (action.type) {
-            case ADD_POST:
-                this.addPost()
-                break
-            case ADD_MESSAGE:
-                this.addMessage()
-                break
-            case UPDATE_POST_TEXT:
-                this.updatePostText(action.newText)
-                break
-            case UPDATE_MESSAGE_TEXT:
-                this.updateMessageText(action.newText)
-                break
-
-        }
+        this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage, action);
+        this._state.profilePage = profilePageReducer(this._state.profilePage, action);
+        this._state.sitebar = sitebarReducer(this._state.sitebar, action)
+        this._subscribe()
     }
 }
-
-
 
 export default store;
 Window.store = store;
