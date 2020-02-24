@@ -36,17 +36,21 @@ export const addMessageActionCreator = () => {
 const dialogsPageReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
-            let newMessageElement = {
-                id: 8,
-                message: state.newMessageText,
-                type: true
-            };
-            state.messages.push(newMessageElement);
-            state.newMessageText = '';
-            break
+            return {
+                ...state,
+                messages: [...state.messages, {
+                    id: 8,
+                    message: state.newMessageText,
+                    type: false
+                }],
+                newMessageText: ""
+            }
+
         case UPDATE_MESSAGE_TEXT:
-            state.newMessageText = action.newText;
-            break
+            return {
+                ...state,
+                newMessageText: action.newText
+            }
     }
     return state;
 }

@@ -1,4 +1,3 @@
-
 let initialState = [
     {id: 1, name: 'Толік'},
     {id: 2, name: 'Дімич'},
@@ -8,7 +7,5 @@ let initialState = [
     {id: 6, name: 'Міша'}];
 
 const sitebarReducer = (state = initialState, action) =>{
-
-    return state;
-}
-export  default sitebarReducer;
+return state;}
+export default sitebarReducer;
