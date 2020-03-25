@@ -21,13 +21,13 @@ let initialState = {
     newMessageText: ''
 };
 
-export const updateNewMessageTextActionCreator = (text) => {
+export const updateNewMessageText = (text) => {
     return {
         type: UPDATE_MESSAGE_TEXT,
         newText: text
     }
 }
-export const addMessageActionCreator = () => {
+export const addMessage = () => {
     return {
         type: ADD_MESSAGE
     }
