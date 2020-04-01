@@ -1,20 +1,25 @@
 import React from 'react';
 import s from './User.module.css';
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
-
-const User = (props) => {
+const User = (props) => {console.log()
     return (
         <div className={s.item}>
             <spam>
-                <NavLink to={'/profile/'+props.user.id}>
+                <NavLink to={'/profile/' + props.user.id}>
                     <img
                         src={props.user.uniqueUrlName ? props.user.uniqueUrlName : 'https://www.kodefork.com/static/users/images/user.png'}
                         className={s.userPhoto}/>
                 </NavLink>
                 <div>
-                    <button
-                        onClick={props.user.followed ? () => props.unfollowClick(props.user.id) : () => props.followClick(props.user.id)}>
+                    <button disabled={props.followingInProgress.some(id => id === props.user.id)}
+                            onClick={props.user.followed ? () => {
+                                    props.unfollow(props.user.id)
+                                }
+                                : () => {
+                                    props.follow(props.user.id)
+                                }
+                            }>
                         {props.user.followed ? 'follow' : 'unfollow'}
                     </button>
                 </div>

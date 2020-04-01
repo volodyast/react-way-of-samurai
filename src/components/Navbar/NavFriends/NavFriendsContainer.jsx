@@ -8,10 +8,8 @@ const mapStareToProps = (state) => {
         sitebar: state.sitebar
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {}
-}
-const NavFriendsContainer = connect(mapStareToProps, mapDispatchToProps)(NavFriends);
+
+const NavFriendsContainer = connect(mapStareToProps, {})(NavFriends);
 
 
 export default NavFriendsContainer;

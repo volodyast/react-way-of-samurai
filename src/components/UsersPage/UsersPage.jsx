@@ -1,5 +1,5 @@
 import React from "react"
-import s from "./UsersAPIComponent.module.css";
+import s from "./UsersPageComponent.module.css";
 import User from "./User/User";
 
 let UsersPage = (props) => {
@@ -10,8 +10,9 @@ let UsersPage = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
-    let usersElements = props.users.map(u => <User user={u} followClick={props.followUser}
-                                                   unfollowClick={props.unfollowUser}/>)
+    let usersElements = props.users.map(u => <User user={u} follow={props.follow}
+                                                   unfollow={props.unfollow}
+                                                   followingInProgress= {props.followingInProgress}/>)
     return (
         <div className={s.profile}>
             <div> {pages.map(p => {

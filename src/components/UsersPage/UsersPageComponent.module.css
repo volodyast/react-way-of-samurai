@@ -1,0 +1,15 @@
+.profile{
+    margin: 0px;
+}
+.selectedPage{
+    font-weight: bold;
+}
+
+.page{
+    display: inline;
+}
+.usersItem{
+    margin: 1000px;
+    margin-bottom: 10px;
+    display: inline;
+}
