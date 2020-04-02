@@ -10,8 +10,6 @@ const mapStareToProps = (state) => {
     }
 }
 
-const MyPostsContainer = connect(mapStareToProps, {
-    addPost,
-    updateNewPostText
-})(MyPosts);
+
+const MyPostsContainer = connect(mapStareToProps, {addPost,updateNewPostText})(MyPosts);
 export default MyPostsContainer;

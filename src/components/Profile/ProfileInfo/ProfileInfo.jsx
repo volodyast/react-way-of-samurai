@@ -5,15 +5,16 @@ import Preloader from "../../common/Preloader/Preloader";
 const ProfileInfo = (props) => {
     if(!props.profile)
         return <Preloader/>
+    console.log(props)
  return (
     <div >
       <div>
-        <img src={props.profile.photos.large}/>
+        <img src={props.profile.data.photos.large}/>
       </div>
       <div className={s.descriptionBlock}>
-          <p>About me: {props.profile.aboutMe}</p>
-          <p>Looking for a job description: {props.profile.lookingForAJobDescription}</p>
-          <p>Instagram: {props.profile.contacts.instagram}</p>
+          <p>About me: --------------------------{props.profile.data.aboutMe}</p>
+          <p>Looking for a job description: ---{props.profile.data.lookingForAJobDescription}</p>
+          <p>Instagram: ------------------------- {props.profile.data.contacts.instagram}</p>
   </div>
     </div>
   )
