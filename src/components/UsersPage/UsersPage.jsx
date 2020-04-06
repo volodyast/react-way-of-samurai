@@ -1,6 +1,7 @@
 import React from "react"
 import s from "./UsersPageComponent.module.css";
 import User from "./User/User";
+import {Pagination} from "../common/Pagenation/Pagination"
 
 let UsersPage = (props) => {
 
@@ -13,6 +14,7 @@ let UsersPage = (props) => {
     let usersElements = props.users.map(u => <User user={u} follow={props.follow}
                                                    unfollow={props.unfollow}
                                                    followingInProgress= {props.followingInProgress}/>)
+
     return (
         <div className={s.profile}>
             <div> {pages.map(p => {
@@ -23,6 +25,7 @@ let UsersPage = (props) => {
             })}
             </div>
             <div></div>
+            <Pagination totalUsersCount={props.totalUsersCount} pageSize={props.pageSize} currentPage={props.currentPage} onPageChanged={props.onPageChanged}/>
             <div className={s.usersItem}> {usersElements}</div>
         </div>
     )

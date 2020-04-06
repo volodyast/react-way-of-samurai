@@ -3,11 +3,10 @@ import {connect} from 'react-redux';
 import {
     setCurrentPage,
     follow,
-    unfollow, toggleFollowingProgress, getUsers
+    unfollow, getUsers
 } from "../../redax/userPageReducer";
 import UsersPage from './UsersPage';
 import Preloader from '../common/Preloader/Preloader';
-import {usersAPI} from "../../api/api";
 
 class UsersAPIComponent extends React.Component {
 
@@ -52,8 +51,7 @@ const mapStareToProps = (state) => {
 }
 
 
-const UsersPageContainer = connect(mapStareToProps, {
-    follow, unfollow, setCurrentPage, getUsers
+const UsersPageContainer = connect(mapStareToProps, {follow, unfollow, setCurrentPage, getUsers
 })(UsersAPIComponent);
 export default UsersPageContainer;
 

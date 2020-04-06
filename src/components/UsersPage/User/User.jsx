@@ -2,13 +2,13 @@ import React from 'react';
 import s from './User.module.css';
 import {NavLink} from 'react-router-dom';
 
-const User = (props) => {console.log()
+const User = (props) => {console.log(props)
     return (
         <div className={s.item}>
             <spam>
                 <NavLink to={'/profile/' + props.user.id}>
                     <img
-                        src={props.user.uniqueUrlName ? props.user.uniqueUrlName : 'https://www.kodefork.com/static/users/images/user.png'}
+                        src={props.user.photos.small ? props.user.photos.small : 'https://www.kodefork.com/static/users/images/user.png'}
                         className={s.userPhoto}/>
                 </NavLink>
                 <div>
