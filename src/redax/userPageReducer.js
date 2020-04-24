@@ -51,6 +51,7 @@ export const follow = (userId) => {
     }
 }
 //AC
+
 export const setTotalUsersCount = (totalUsersCount) => {
     return {
         type: SET_TOTAL_USERS_COUNT, totalUsers: totalUsersCount

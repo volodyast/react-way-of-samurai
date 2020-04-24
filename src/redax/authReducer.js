@@ -26,6 +26,20 @@ export const getAuth = () => {
     }
 }
 
+export const setLogin = (email, password, rememberMe, captcha) => {
+    return (dispatch) => {
+        dispatch(setFetching(true));
+        authAPI.login(email, password, rememberMe, captcha).then(
+            response => {
+                dispatch(setFetching(false));
+                if(response.data.resultCode === 0){
+                    getAuth();
+                }
+            })
+        dispatch(setFetching(false));
+    }
+}
+
 export const setUserData = (userId, email, login) => {
     return {
         type: SET_USER_DATA, data:{userId, email, login}
