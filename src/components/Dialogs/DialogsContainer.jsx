@@ -1,5 +1,5 @@
 import React from 'react';
-import {addMessage, updateNewMessageText} from "../../redax/dialogsPageReducer";
+import {addMessage} from "../../redax/dialogsPageReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {compose} from "redux";
@@ -12,6 +12,6 @@ const mapStareToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStareToProps, {updateNewMessageText,addMessage}),
+    connect(mapStareToProps, {addMessage}),
     withAuthRedirect
 )(Dialogs);

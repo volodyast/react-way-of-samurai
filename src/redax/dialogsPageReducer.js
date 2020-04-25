@@ -17,19 +17,12 @@ let initialState = {
         {id: 4, message: 'WAYdD', type: true},
         {id: 5, message: 'Are you sleep?', type: false},
         {id: 6, message: 'What up', type: true}
-    ],
-    newMessageText: ''
+    ]
 };
 
-export const updateNewMessageText = (text) => {
+export const addMessage = (messageText) => {
     return {
-        type: UPDATE_MESSAGE_TEXT,
-        newText: text
-    }
-}
-export const addMessage = () => {
-    return {
-        type: ADD_MESSAGE
+        type: ADD_MESSAGE,messageText
     }
 }
 
@@ -40,16 +33,9 @@ const dialogsPageReducer = (state = initialState, action) => {
                 ...state,
                 messages: [...state.messages, {
                     id: 8,
-                    message: state.newMessageText,
+                    message: action.messageText,
                     type: false
-                }],
-                newMessageText: ""
-            }
-
-        case UPDATE_MESSAGE_TEXT:
-            return {
-                ...state,
-                newMessageText: action.newText
+                }]
             }
     }
     return state;
