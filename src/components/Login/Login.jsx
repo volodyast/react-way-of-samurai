@@ -1,38 +1,24 @@
 import React from 'react';
-import {Field, reduxForm} from "redux-form";
+import {Redirect} from "react-router-dom";
+import LoginRedaxForm from "./FormLogin";
 
-const LoginForm = (props) => {
-    return (<form onSubmit={props.handleSubmit}>
-        <div>
-            <Field placeholder={'Login'} name={'Login'} component={'input'}/>
-        </div>
-        <div>
-            <Field placeholder={'Password'} name={'Password'} component={'input'}/>
-        </div>
-        <div>
-            <Field component={'input'} name={'RememberMe'} type={'checkbox'}/> remember me
-        </div>
-        <div>
-            <button>send</button>
-        </div>
-    </form>);
-}
 
-const LoginRedaxForm = reduxForm({
-    form: 'Login'
-})(LoginForm)
 
 const Login = (props) => {
 
-    const onSubmit = (FormData) =>{
-        props.setLogin(FormData.Login, FormData.Password, FormData.RememberMe)
+    const onSubmit = (FormData) => {
+        props.login(FormData.Login, FormData.Password, FormData.RememberMe)
     }
 
     return (
-        <div>
-            <h3>login</h3>
-            <LoginRedaxForm onSubmit={onSubmit}/>
-        </div>);
+        props.isAuth ?
+            <Redirect to="/profile"/>
+            :
+            (<div>
+                <h3>login</h3>
+                <LoginRedaxForm {...props} onSubmit={onSubmit}/>
+            </div>)
+    );
 }
 
 export default Login;

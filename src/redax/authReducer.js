@@ -1,48 +1,66 @@
 import {authAPI, usersAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
-const SET_USER_DATA  = 'SET-USER-DATA';
+const SET_USER_DATA = 'SET-USER-DATA';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 let initialState = {
-    userId:null,
+    userId: null,
     email: "",
-    login:"",
+    login: "",
     isFetching: false,
-    isAuth:false
+    isAuth: false
 };
 
 
 export const getAuth = () => {
     return (dispatch) => {
         dispatch(setFetching(true));
-        authAPI.me().then(
+        return authAPI.me().then(
             response => {
                 dispatch(setFetching(false));
-                if(response.data.resultCode == 0){
-                    let {id,login, email} = response.data.data;
-                    dispatch(setUserData(id,email, login))
+                if (response.data.resultCode == 0) {
+                    let {id, login, email} = response.data.data;
+                    dispatch(setUserData(id, email, login, true))
                 }
             })
     }
 }
 
-export const setLogin = (email, password, rememberMe, captcha) => {
+export const login = (email, password, rememberMe, captcha) => {
     return (dispatch) => {
         dispatch(setFetching(true));
         authAPI.login(email, password, rememberMe, captcha).then(
             response => {
                 dispatch(setFetching(false));
-                if(response.data.resultCode === 0){
-                    getAuth();
+                if (response.data.resultCode === 0) {
+                    dispatch(getAuth());
+                } else {
+                    let message = response.data.messages.length ? response.data.messages[0] : "Some error";
+                    dispatch(stopSubmit("Login", {_error: message}))
                 }
             })
         dispatch(setFetching(false));
     }
 }
 
-export const setUserData = (userId, email, login) => {
+export const logout = () => {
+    return (dispatch) => {
+        dispatch(setFetching(true));
+        authAPI.logout().then(
+            response => {
+                dispatch(setFetching(false));
+                if (response.data.resultCode === 0) {
+                    dispatch(setUserData(null, null, null, false))
+                }
+            })
+        dispatch(setFetching(false));
+    }
+}
+
+export const setUserData = (userId, email, login, isAuth) => {
     return {
-        type: SET_USER_DATA, data:{userId, email, login}
+        type: SET_USER_DATA, payload: {userId, email, login, isAuth}
     }
 }
 export const setFetching = (Users) => {
@@ -57,8 +75,7 @@ const authReducer = (state = initialState, action) => {
         case SET_USER_DATA:
             return {
                 ...state,
-                ...action.data,
-                isAuth: true
+                ...action.payload
             }
         case TOGGLE_IS_FETCHING:
             return {

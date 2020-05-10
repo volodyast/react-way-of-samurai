@@ -2,12 +2,9 @@ import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
 import Preloader from "../common/Preloader/Preloader";
-import {getAuth, setFetching, setUserData} from "../../redax/authReducer";
+import {logout} from "../../redax/authReducer";
 
 class HeaderApiContainer extends React.Component {
-    componentDidMount() {
-        this.props.getAuth();
-    }
 
     render() {
         return <>
@@ -25,6 +22,6 @@ const mapStareToProps = (state) => {
     }
 }
 
-const HeaderContainer = connect(mapStareToProps, {setFetching, setUserData,getAuth})(HeaderApiContainer);
+const HeaderContainer = connect(mapStareToProps, {logout})(HeaderApiContainer);
 
 export default HeaderContainer;

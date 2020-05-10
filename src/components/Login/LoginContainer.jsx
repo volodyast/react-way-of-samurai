@@ -1,13 +1,12 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {compose} from "redux";
 import Login from "./Login";
-import {setLogin} from "../../redax/authReducer";
+import {login, logout} from "../../redax/authReducer";
 
 const mapStareToProps = (state) => {
-    return {}
+    return {
+        isAuth: state.auth.isAuth
+    }
 }
 
-export default compose(
-    connect(mapStareToProps, {setLogin})
-)(Login);
+export default connect(mapStareToProps, {login, logout})(Login);
