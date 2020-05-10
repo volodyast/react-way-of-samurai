@@ -34,8 +34,11 @@ export const getStatus = (userId) => {
 export const updateStatus = (status) => {
     return (dispatch) => {
         profileAPI.updateStatus(status).then(response => {
-            if (response.data.result === 0)
-                getStatus(status);
+            console.log(response)
+            if (response.data.resultCode === 0) {
+                dispatch(getStatus(status));
+                console.log(status)
+            }
         });
     }
 }
